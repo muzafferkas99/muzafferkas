@@ -1,0 +1,23 @@
+//Muzaffer kas
+var gcd = function(a, b) {
+    var temp;
+    while (b !== 0) {
+        temp = b;
+        b = a % temp;
+        a = temp;
+    }
+    return a;
+};
+    
+var lcm = function(a, b) {
+    return a / gcd(a, b) * b;
+};
+
+var range = function(a, b) {
+    var out = [];
+    for(var i = a; i <= b; i++) {
+        out[i - a] = i;
+    }
+    return out;
+};
+console.log(range(1, 20).reduce(lcm));

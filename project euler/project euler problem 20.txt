@@ -1,0 +1,32 @@
+//Muzaffer KAŞ//
+var sayi = function(n) {
+    return function(arrA, arrB) {
+    var sonuc = [];
+    for (var posA = 0; posA < arrA.length; posA++) {
+        for (var posB = 0; posB < arrB.length; posB++) {
+           sonuc[posA + posB] = arrA[posA] * arrB[posB] + (sonuc[posA + posB] || 0);
+        }
+    }
+Number(n);
+};
+var longMultiply = 
+    for (var i = 0; i < sonuc.length; i++) {
+        var degistir = Math.floor(sonuc[i] / 10);
+        sonuc[i] %= 10;
+        if (degistir !== 0) {
+            sonuc[i+1] = degistir + (sonuc[i+1] || 0);
+        }
+     }
+    return sonuc;
+};
+var toplam = function(a, b) {
+    return a + b;
+};
+var faktöriyeltoplam = function(n) {
+    var numara = [];
+    for (var i = 1; i <= n; i++) {
+        numara.push(String(i).split("").reverse().map(sayi));
+    }
+    return numara.reduce(longMultiply).reduce(toplam);
+};
+console.log(faktöriyeltoplam(100));

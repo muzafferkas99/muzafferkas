@@ -1,0 +1,20 @@
+//Muzaffer KAŞ //
+
+function besinciguc(n) {
+    var toplam = 0;
+    var sayi = n;
+    while (sayi) {
+        toplam += Math.pow(sayi % 10, 5);
+        sayi = Math.floor(sayi/10);
+    }
+    return toplam === n;
+}
+
+function besinciguctoplam(max) {
+    var toplam = 0;
+    while (max-- > 10) {
+        if (besinciguc(max)) toplam += max;
+    }
+    return toplam;
+}
+console.log( besinciguctoplam(1000000) );
