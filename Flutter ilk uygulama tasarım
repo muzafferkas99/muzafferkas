@@ -1,0 +1,237 @@
+main dart 
+
+import 'package:flutter/material.dart';
+import 'package:uygulamaapp/gonderikarti.dart';
+import 'package:uygulamaapp/profilsayfasi.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Projem',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
+      home: Anasayfa(),
+    );
+  }
+}
+
+class Anasayfa extends StatefulWidget {
+  @override
+  _AnasayfaState createState() => _AnasayfaState();
+}
+
+class _AnasayfaState extends State<Anasayfa> {
+  ///stateleswidget == hareketsiz nesne olarak tanımlanıyor
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor:
+          Colors.grey[100], //==> kod ekranın rengini düzenleme yarıyor
+      appBar: AppBar(
+        //==> appbar ekranın en üst kısmını yapmamız için kullanılıyor
+        backgroundColor: Colors
+            .grey[100], //==> appbarın yani en üst alanın rengini belirliyor
+        elevation:
+            0.0, //==> appar en üst alanın gölgelendirmesini düzenlemeye yarıyor
+        leading: IconButton(
+            icon: Icon(
+              //leading ten sonraki kısım
+              Icons.menu, //sol üst köşedeki hamburgere benzeyen
+              color: Colors.grey, // iconu yapmak için kullanılan kodlar
+              size: 32.0, //onPressed e kadar dahil
+            ),
+            onPressed: () {}),
+
+        title: Text("DEHA APP",
+            style: TextStyle(fontSize: 20.0, color: Colors.grey)),
+        centerTitle: true,
+
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.notifications,
+                  color: Colors.purple[300], size: 32.0),
+
+//// sağ üst köşedeki bildirimler sayfasını açmak için aşağıdaki kodlar kullanılır
+              onPressed: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Column(
+                        children: <Widget>[
+                          duyuru("Hasan seni takip etti ", "3 dk önce"),
+                          duyuru("Mehmet seni takip etti ", "7 dk önce")
+                        ],
+                      );
+                    });
+              }),
+        ],
+      ),
+
+      body: ListView(
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+                ////gölgelendirme burdan başlıyor
+                color: Colors.grey[100],
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(5.0, 3.0),
+                      blurRadius: 5.0)
+
+                  /// gölgelendirme burada bitiyor
+                ]),
+            height: 100.0,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                /// profil kartlarını aşağıdaki kodlar oluşturuyor
+
+                profilkartiolustur(
+                    "İbrahim",
+                    "https://pbs.twimg.com/profile_images/826380551175208960/kpXZ3DhI_400x400.jpg",
+                    "İbrahim Yıldız",
+                    "https://cdn.pixabay.com/photo/2015/06/19/21/24/the-road-815297_960_720.jpg"),
+                profilkartiolustur(
+                    "Balaban",
+                    "https://pbs.twimg.com/profile_images/1285537868241408001/bapjLkAF_400x400.jpg",
+                    "Mehmet Balaban",
+                    "https://cdn.pixabay.com/photo/2015/06/19/21/24/the-road-815297_960_720.jpg"),
+                profilkartiolustur(
+                    "Onur",
+                    "https://pbs.twimg.com/profile_images/1335639771234832384/9hqJfs0O_400x400.jpg",
+                    "Onur İlyasoğlu",
+                    "https://cdn.pixabay.com/photo/2015/06/19/21/24/the-road-815297_960_720.jpg"),
+                profilkartiolustur(
+                    "Kerim",
+                    "https://pbs.twimg.com/profile_images/1340328016833081346/gd7mxgxo_400x400.jpg",
+                    "Kerim Karbeyaz",
+                    "https://cdn.pixabay.com/photo/2015/06/19/21/24/the-road-815297_960_720.jpg"),
+                profilkartiolustur(
+                    "Selim",
+                    "https://pbs.twimg.com/profile_images/1327378103245697033/yUahXDQk_400x400.jpg",
+                    "Selim Saban",
+                    "https://cdn.pixabay.com/photo/2015/06/19/21/24/the-road-815297_960_720.jpg"),
+                profilkartiolustur(
+                    "Tolga",
+                    "https://pbs.twimg.com/profile_images/1334131127393652736/0_oGKPAn_400x400.jpg",
+                    "Tolgahan Bilmez",
+                    "https://cdn.pixabay.com/photo/2015/06/19/21/24/the-road-815297_960_720.jpg"),
+
+                /// profil kartları kısmı üst taraf
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10.0,
+          ),
+          Gonderikarti(
+            isimSoyad: "Muzaffer Kaş",
+            gecenSure: "1 saat önce",
+            aciklama: "BAYKAŞ TARAFINDAN ",
+            profilResimLinki:
+                "https://pbs.twimg.com/profile_images/1300701953937346560/bqW6y0y9_400x400.jpg",
+            gonderiResimLinki:
+                "https://pbs.twimg.com/profile_images/1300701953937346560/bqW6y0y9_400x400.jpg",
+          ),
+          Gonderikarti(
+            isimSoyad: "Ali Mert",
+            gecenSure: "3 saat önce",
+            aciklama: "DEHA TARAFINDAN ",
+            profilResimLinki:
+                "https://scontent.fbtz1-7.fna.fbcdn.net/v/t1.0-9/87325774_10215620218170137_8183202206976049152_n.jpg?_nc_cat=101&ccb=2&_nc_sid=09cbfe&_nc_ohc=r9X68SWQNKkAX-IMAWC&_nc_ht=scontent.fbtz1-7.fna&oh=21fd904ce7376c1d4e8f0a831b90c152&oe=600967C2",
+            gonderiResimLinki:
+                "https://scontent.fbtz1-7.fna.fbcdn.net/v/t1.0-9/87325774_10215620218170137_8183202206976049152_n.jpg?_nc_cat=101&ccb=2&_nc_sid=09cbfe&_nc_ohc=r9X68SWQNKkAX-IMAWC&_nc_ht=scontent.fbtz1-7.fna&oh=21fd904ce7376c1d4e8f0a831b90c152&oe=600967C2",
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: null,
+        backgroundColor: Colors.purple[300],
+        child: Icon(
+          Icons.add_a_photo,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+
+  Padding duyuru(String mesaj, String gecenSure) {
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            mesaj,
+            style: TextStyle(fontSize: 20.0),
+          ),
+          Text(gecenSure),
+        ],
+      ),
+    );
+  }
+
+  Widget profilkartiolustur(String kullaniciAdi, String resimLinki,
+      String isimSoyad, String kapakResimLinki) {
+    return Material(
+      child: InkWell(
+        onTap: () {
+          Future<dynamic> donenVeri =
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => ProfilSayfasi(
+                        profilResimLinki: resimLinki,
+                        kullaniciadi: kullaniciAdi,
+                        isimsoyad: isimSoyad,
+                        kapakResimLinki: kapakResimLinki,
+                      )));
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+          child: Column(
+            children: <Widget>[
+              Stack(
+                alignment: Alignment
+                    .topRight, //çevrimiçi görünme kısmını sağ tarafa alıyor
+                children: <Widget>[
+                  Hero(
+                    tag: kullaniciAdi,
+                    child: Container(
+                      width: 70.0,
+                      height: 70.0,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(width: 2.0, color: Colors.grey),
+                          borderRadius: BorderRadius.circular(35.0),
+                          image: DecorationImage(
+                              image: NetworkImage(resimLinki),
+                              fit: BoxFit.cover)),
+                    ),
+                  ),
+                  Container(
+                      width: 20.0,
+                      height: 20.00,
+                      decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(25.0),
+                          border: Border.all(width: 2.0, color: Colors.white)))
+                ],
+              ),
+              Text(
+                kullaniciAdi,
+                style: TextStyle(fontSize: 15.0, color: Colors.black),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+//// profil sayfası başlangıcı
