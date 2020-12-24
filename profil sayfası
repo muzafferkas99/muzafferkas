@@ -1,0 +1,176 @@
+prfil sayfası 
+
+import 'package:flutter/material.dart';
+import 'package:uygulamaapp/gonderikarti.dart';
+
+class ProfilSayfasi extends StatelessWidget {
+  final String isimsoyad;
+  final String kullaniciadi;
+  final String kapakResimLinki;
+  final String profilResimLinki;
+
+  const ProfilSayfasi(
+      {Key key,
+      this.kullaniciadi,
+      this.kapakResimLinki,
+      this.profilResimLinki,
+      this.isimsoyad})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey[100],
+      body: ListView(
+        children: <Widget>[
+          Stack(
+            children: <Widget>[
+              Container(
+                height: 230.0,
+                //color: Colors.yellow,
+              ),
+              Container(
+                height: 180.0,
+                decoration: BoxDecoration(
+                    color: Colors.green,
+                    image: DecorationImage(
+                        image: NetworkImage(kapakResimLinki),
+                        fit: BoxFit.cover)),
+              ),
+              Positioned(
+                left: 20.0,
+                bottom: 0.0,
+                child: Hero(
+                  tag: kullaniciadi,
+                  child: Container(
+                    width: 120.0,
+                    height: 120.0,
+                    decoration: BoxDecoration(
+                        color: Colors.lightBlue,
+                        borderRadius: BorderRadius.circular(60.0),
+                        border: Border.all(width: 2.00, color: Colors.white),
+                        image: DecorationImage(
+                            image: NetworkImage(profilResimLinki),
+                            fit: BoxFit.cover)),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 190.0,
+                left: 145.0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      isimsoyad,
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Text(
+                      kullaniciadi,
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Positioned(
+                top: 130.0,
+                right: 15.0,
+                child: Container(
+                    width: 100.0,
+                    height: 40.0,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Colors.grey[200],
+                        border: Border.all(width: 2.0, color: Colors.white)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.add_circle,
+                          size: 18.0,
+                        ),
+                        SizedBox(
+                          width: 2.0,
+                        ),
+                        Text(
+                          "Takip Et",
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    )),
+              ),
+              IconButton(
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context, "Döndüm");
+                  })
+            ],
+          ),
+          SizedBox(height: 20.0),
+          Container(
+            height: 75.0,
+            color: Colors.grey.withOpacity(0.5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment
+                  .spaceEvenly, //// takip takipçi arasına boşluk koyuyor spaceEVenly
+              children: <Widget>[
+                sayac("Takipçi", "1M"),
+                sayac("Takip", "77"),
+                sayac("Paylaşım", "7"),
+              ],
+            ),
+          ),
+          Gonderikarti(
+            isimSoyad: "Ali Mert",
+            gecenSure: "3 saat önce",
+            aciklama: "DEHA TARAFINDAN ",
+            profilResimLinki:
+                "https://scontent.fbtz1-7.fna.fbcdn.net/v/t1.0-9/87325774_10215620218170137_8183202206976049152_n.jpg?_nc_cat=101&ccb=2&_nc_sid=09cbfe&_nc_ohc=r9X68SWQNKkAX-IMAWC&_nc_ht=scontent.fbtz1-7.fna&oh=21fd904ce7376c1d4e8f0a831b90c152&oe=600967C2",
+            gonderiResimLinki:
+                "https://scontent.fbtz1-7.fna.fbcdn.net/v/t1.0-9/87325774_10215620218170137_8183202206976049152_n.jpg?_nc_cat=101&ccb=2&_nc_sid=09cbfe&_nc_ohc=r9X68SWQNKkAX-IMAWC&_nc_ht=scontent.fbtz1-7.fna&oh=21fd904ce7376c1d4e8f0a831b90c152&oe=600967C2",
+          ),
+        ],
+      ),
+    );
+  }
+
+  Column sayac(String baslik, sayi) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          sayi,
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        SizedBox(
+          height: 1.0,
+        ),
+        Text(baslik,
+            style: TextStyle(
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey[600],
+            ))
+      ],
+    );
+  }
+}
